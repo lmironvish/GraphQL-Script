@@ -1,0 +1,111 @@
+query Special{PasteMark}CompositeOffers($target: String!, $features: [String]!) {
+  subscriptionCompositeOffers(features: $features, target: $target) {
+    batchPositionId
+    offers {
+      compositeOffer {
+        positionId
+        structureType
+        forActiveOffers {
+          ... on PlusOptionOffer {
+            name
+            __typename
+          }
+          ... on PlusTariffOffer {
+            name
+            __typename
+          }
+          __typename
+        }
+        tariffOffer {
+          name
+          text
+          title
+          tariff {
+            name
+            __typename
+          }
+          additionText
+          commonPrice {
+            amount
+            currency
+          }
+          commonPeriod
+          plans {
+            ... on TrialPlan {
+              period
+            }
+            ... on TrialUntilPlan {
+              until
+            }
+            ... on IntroPlan {
+              price {
+                amount
+                currency
+              }
+              period
+              repetitionCount
+            }
+            ... on IntroUntilPlan {
+              price {
+                amount
+                currency
+              }
+              until
+            }
+            __typename
+          }
+          __typename
+        }
+        optionOffers {
+          title
+          text
+          additionText
+          name
+          option {
+            name
+            __typename
+          }
+          commonPrice {
+            amount
+            currency
+          }
+          commonPeriod
+          plans {
+            ... on TrialPlan {
+              period
+            }
+            ... on TrialUntilPlan {
+              until
+            }
+            ... on IntroPlan {
+              price {
+                amount
+                currency
+              }
+              period
+              repetitionCount
+            }
+            ... on IntroUntilPlan {
+              price {
+                amount
+                currency
+              }
+              until
+            }
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      customPayload {
+        overridedText
+        overridedAdditionalText
+        overridedTarget
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

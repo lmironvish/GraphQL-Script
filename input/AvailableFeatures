@@ -1,0 +1,9 @@
+query Special{PasteMark}AvailableFeatures {
+  userProfile {
+    subscriptionInfo {
+      contentPackages {
+        billingFeatureName
+      }
+    }
+  }
+}
