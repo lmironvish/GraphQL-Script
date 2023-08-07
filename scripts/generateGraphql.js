@@ -1,6 +1,5 @@
 const fs = require("fs");
 const dateFns = require("date-fns");
-const {exit} = require("process");
 
 const userInput = process.argv[2];
 const projectName = toPascal(userInput);
