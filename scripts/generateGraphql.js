@@ -1,5 +1,6 @@
 const fs = require("fs");
 const dateFns = require("date-fns");
+const {exit} = require("process");
 
 const userInput = process.argv[2];
 const projectName = toPascal(userInput);
@@ -15,7 +16,7 @@ for (let i = 0; i < inputFiles.length; i++) {
     inputFileContent[itemKeys[i]] = getEntityFile(inputFiles[i])
     outputFileContent[itemKeys[i]] = inputFileContent[itemKeys[i]].replace(regex, projectName)
     const date = dateFns.format(new Date, 'yyyy_MM_dd')
-    const filename = `./output/Special${projectName}${itemKeys[i]}_${date}.graphql`;
+    const filename = `./__mock__/output/Special${projectName}${itemKeys[i]}_${date}.graphql`;
     writeFile(filename, outputFileContent[itemKeys[i]])
 }
 
@@ -51,9 +52,9 @@ function getFullPaths(array, path) {
 
 
 function writeFile(path, content) {
-    const directory = path.match(/.\/[a-zA-z]+.\//gm)[0]
+    let directory = path.match(/.+[a-zA-z]+\//gm)[0]
     try {
-        if (!fs.existsSync(directory)) fs.mkdirSync(directory)
+        if (!fs.existsSync(directory)) fs.mkdirSync(directory, { recursive: true })
         fs.writeFileSync(path, content);
     } catch (err) {
         console.log(err)
